@@ -433,6 +433,7 @@
       .layout { min-height: calc(100vh - 58px); }
       .sidebar {
         height: 62px;
+        min-height: 0;
         padding: 5px 8px;
         border-top: 1px solid #eeeaf2;
         background: rgba(255,255,255,.94);
@@ -455,6 +456,120 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+    .analytics-view { --analytics-rose: #fa3c70; }
+    .analytics-view .heading { align-items: center; }
+    .analytics-view .heading-copy { display: flex; align-items: center; gap: 15px; }
+    .analytics-view .heading-mark {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 1px solid #ffe0e9;
+      border-radius: 15px;
+      color: var(--analytics-rose);
+      background: linear-gradient(145deg, #fff, #fff0f5);
+      box-shadow: 0 7px 18px rgba(243, 50, 104, .08);
+      font-size: 21px;
+    }
+    .analytics-view .heading h1 { font-size: 27px; }
+    .analytics-view .heading select { width: auto; min-width: 152px; border-radius: 10px; }
+    .analytics-view .page-banner {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 14px;
+      margin-bottom: 19px;
+      border-color: #f0e9f4;
+      border-radius: 10px;
+      color: #777383;
+      background: rgba(255,255,255,.76);
+      font-size: 11px;
+    }
+    .analytics-view .page-banner::before { content: "i"; width: 17px; height: 17px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; color: #9b5c79; background: #fff0f5; font: 700 10px Georgia, serif; }
+    .analytics-kpis { gap: 14px; }
+    .analytics-kpis .stat-card { min-height: 120px; padding: 18px 19px; border-radius: 14px; }
+    .analytics-kpis .stat-card::after { width: 64px; height: 64px; right: -22px; top: -24px; }
+    .analytics-kpis .stat-value { margin-top: 9px; font-size: 25px; }
+    .analytics-kpis .stat-change { display: flex; align-items: center; gap: 5px; margin-top: 6px; color: #179b70; }
+    .analytics-chart-card { margin-top: 16px; padding: 22px 22px 16px; overflow: hidden; }
+    .analytics-chart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin: 0 0 10px; }
+    .analytics-chart-title { margin: 0; font-size: 15px; font-weight: 750; }
+    .analytics-chart-caption { margin-top: 4px; color: #9996a3; font-size: 10px; }
+    .analytics-total { text-align: right; }
+    .analytics-total strong { display: block; color: #292435; font-size: 20px; letter-spacing: -.4px; }
+    .analytics-total span { color: #179b70; font-size: 10px; }
+    .analytics-plot {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      align-items: stretch;
+      height: 220px;
+      padding: 16px 9px 0;
+      border-bottom: 1px solid #e8e4ed;
+      background: repeating-linear-gradient(to bottom, transparent 0, transparent 53px, #f0edf3 54px, transparent 55px);
+    }
+    .analytics-day {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+    .analytics-value {
+      position: absolute;
+      z-index: 3;
+      bottom: calc(var(--bar-height) + 10px);
+      padding: 5px 7px;
+      border: 1px solid #f0eaf0;
+      border-radius: 7px;
+      color: #514b5b;
+      background: white;
+      box-shadow: 0 4px 12px rgba(40,25,70,.08);
+      font-size: 9px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      pointer-events: none;
+      transition: .15s ease;
+    }
+    .analytics-day:hover .analytics-value, .analytics-day:focus-within .analytics-value { opacity: 1; transform: translateY(0); }
+    .analytics-bar {
+      width: clamp(18px, 4.5vw, 30px);
+      height: var(--bar-height);
+      min-height: 11px;
+      border-radius: 7px 7px 2px 2px;
+      background: linear-gradient(180deg, #ff678e 0%, #fb3d70 75%, #ed2c62 100%);
+      box-shadow: 0 7px 15px rgba(243, 50, 104, .16);
+      transition: filter .16s ease, transform .16s ease;
+    }
+    .analytics-day:hover .analytics-bar { filter: saturate(1.12); transform: translateY(-2px); }
+    .analytics-day-label { padding: 10px 0 9px; color: #797584; font-size: 10px; }
+    .analytics-legend { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; color: #898694; font-size: 10px; }
+    .analytics-legend span:first-child::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #f84b78; }
+    .analytics-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .analytics-insight { padding: 18px 20px; }
+    .analytics-insight h2 { margin: 0; font-size: 13px; }
+    .analytics-insight p { margin: 8px 0 0; color: #858192; font-size: 11px; line-height: 1.7; }
+    .analytics-insight strong { color: #2d2838; }
+    @media (max-width: 560px) {
+      .layout { grid-template-columns: 1fr; }
+      main { width: 100%; }
+      .analytics-view .heading-copy { gap: 10px; }
+      .analytics-view .heading-mark { width: 40px; height: 40px; border-radius: 13px; font-size: 18px; }
+      .analytics-view .heading h1 { font-size: 22px; }
+      .analytics-view .heading select { min-width: 0; width: 118px; height: 36px; padding: 0 7px; font-size: 10px; }
+      .analytics-kpis { gap: 9px; }
+      .analytics-kpis .stat-card { min-height: 106px; padding: 13px; }
+      .analytics-kpis .stat-value { font-size: 21px; }
+      .analytics-chart-card { padding: 17px 14px 13px; }
+      .analytics-plot { height: 195px; padding-right: 3px; padding-left: 3px; }
+      .analytics-bar { width: min(23px, 64%); }
+      .analytics-day-label { font-size: 9px; }
+      .analytics-extra { grid-template-columns: 1fr; gap: 10px; }
     }
   </style>
 </head>
@@ -588,10 +703,10 @@
           <div class="post-row"><div class="video-thumb">▶</div><div><div class="post-title">เบื้องหลังวันทำงานของเรา</div><div class="post-subtitle">5 ต.ค. 2026 · ตัวอย่าง</div></div><span>9,840</span><span>972</span><span class="status-pill example">ตัวอย่าง</span></div>
         </div>
       </section>
-      <section class="page-view" data-page="analytics" hidden>
-        <div class="heading"><div><h1>วิเคราะห์</h1><p class="subtitle">ติดตามการเข้าถึงและการมีส่วนร่วมของผู้ชม</p></div><select aria-label="ช่วงเวลาข้อมูล"><option>7 วันที่ผ่านมา</option><option>28 วันที่ผ่านมา</option><option>60 วันที่ผ่านมา</option></select></div>
+      <section class="page-view analytics-view" data-page="analytics" hidden>
+        <div class="heading"><div class="heading-copy"><span class="heading-mark" aria-hidden="true">↗</span><div><h1>วิเคราะห์ช่อง</h1><p class="subtitle">ติดตามการเข้าถึงและการมีส่วนร่วมของผู้ชม</p></div></div><select aria-label="ช่วงเวลาข้อมูล"><option>7 วันที่ผ่านมา</option><option>28 วันที่ผ่านมา</option><option>60 วันที่ผ่านมา</option></select></div>
         <div class="page-banner">ตัวเลขและกราฟทั้งหมดเป็นข้อมูลจำลอง เพื่อแสดงรูปแบบหน้าจอเท่านั้น</div>
-        <div class="page-grid">
+        <div class="page-grid analytics-kpis">
           <article class="card stat-card"><div class="stat-label">ยอดรับชมวิดีโอ</div><div class="stat-value">128.4K</div><div class="stat-change">↑ 12.8%</div></article>
           <article class="card stat-card"><div class="stat-label">ผู้เข้าชมโปรไฟล์</div><div class="stat-value">6,842</div><div class="stat-change">↑ 9.4%</div></article>
           <article class="card stat-card"><div class="stat-label">ผู้ติดตามใหม่</div><div class="stat-value">+256</div><div class="stat-change">↑ 3.2%</div></article>
@@ -599,9 +714,26 @@
           <article class="card stat-card"><div class="stat-label">ความคิดเห็น</div><div class="stat-value">1,382</div><div class="stat-change">↑ 5.6%</div></article>
           <article class="card stat-card"><div class="stat-label">แชร์</div><div class="stat-value">962</div><div class="stat-change">↑ 2.4%</div></article>
         </div>
-        <section class="card panel" style="margin-top:18px"><div class="panel-heading"><h2>แนวโน้มยอดรับชม</h2><span class="muted-small">ข้อมูลตัวอย่าง</span></div><div class="chart" aria-label="กราฟแนวโน้มยอดรับชมตัวอย่าง">
-          <div class="chart-column"><div class="chart-bar" style="height:35%"></div><span class="chart-label">จ.</span></div><div class="chart-column"><div class="chart-bar" style="height:58%"></div><span class="chart-label">อ.</span></div><div class="chart-column"><div class="chart-bar" style="height:47%"></div><span class="chart-label">พ.</span></div><div class="chart-column"><div class="chart-bar" style="height:76%"></div><span class="chart-label">พฤ.</span></div><div class="chart-column"><div class="chart-bar" style="height:63%"></div><span class="chart-label">ศ.</span></div><div class="chart-column"><div class="chart-bar" style="height:92%"></div><span class="chart-label">ส.</span></div><div class="chart-column"><div class="chart-bar" style="height:70%"></div><span class="chart-label">อา.</span></div>
-        </div></section>
+        <section class="card analytics-chart-card">
+          <div class="analytics-chart-head">
+            <div><h2 class="analytics-chart-title">ภาพรวมการรับชม</h2><div class="analytics-chart-caption">แนวโน้มยอดรับชมในช่วง 7 วันที่ผ่านมา</div></div>
+            <div class="analytics-total"><strong>128.4K</strong><span>↑ 12.8% จากสัปดาห์ก่อน</span></div>
+          </div>
+          <div class="analytics-plot" role="img" aria-label="ยอดรับชมตัวอย่างใน 7 วัน: จันทร์ 12,400, อังคาร 17,200, พุธ 14,100, พฤหัสบดี 20,800, ศุกร์ 16,000, เสาร์ 26,400, อาทิตย์ 21,500 ครั้ง">
+            <div class="analytics-day" style="--bar-height:43%"><span class="analytics-value">12,400 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">จ.</span></div>
+            <div class="analytics-day" style="--bar-height:62%"><span class="analytics-value">17,200 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">อ.</span></div>
+            <div class="analytics-day" style="--bar-height:50%"><span class="analytics-value">14,100 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">พ.</span></div>
+            <div class="analytics-day" style="--bar-height:76%"><span class="analytics-value">20,800 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">พฤ.</span></div>
+            <div class="analytics-day" style="--bar-height:59%"><span class="analytics-value">16,000 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">ศ.</span></div>
+            <div class="analytics-day" style="--bar-height:96%"><span class="analytics-value">26,400 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">ส.</span></div>
+            <div class="analytics-day" style="--bar-height:79%"><span class="analytics-value">21,500 ครั้ง</span><div class="analytics-bar"></div><span class="analytics-day-label">อา.</span></div>
+          </div>
+          <div class="analytics-legend"><span>ยอดรับชม</span><span>ข้อมูลตัวอย่าง</span></div>
+        </section>
+        <div class="analytics-extra">
+          <section class="card analytics-insight"><h2>วันที่มีผู้ชมมากที่สุด</h2><p><strong>วันเสาร์</strong> มียอดรับชมตัวอย่างสูงสุด <strong>26,400 ครั้ง</strong> ในช่วงเวลานี้</p></section>
+          <section class="card analytics-insight"><h2>การเติบโตของช่อง</h2><p>ยอดรับชมเพิ่มขึ้น <strong>12.8%</strong> เมื่อเทียบกับช่วงเวลาก่อนหน้า</p></section>
+        </div>
       </section>
       <section class="page-view" data-page="account" hidden>
         <div class="heading"><div><h1>จัดการบัญชี</h1><p class="subtitle">เชื่อมต่อและจัดการบัญชี TikTok ของคุณ</p></div></div>
